@@ -3,17 +3,22 @@ import { useParams } from "react-router-dom"; // url의 파람을 가져온다.
 
 function Detail() {
   const [loading, setLoading] = useState(true);
-  const [movie, setMovie] = useState("");
+  const [movie, setMovie] = useState(null);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   const getMovie = async () => {
-    const json = await (await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)).json();
-    setMovie(json.data.movie);
-    setLoading(false);
+    try {
+      const json = await (await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)).json();
+      setMovie(json.data.movie);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
   };
   useEffect(() => {
     getMovie();
-    console.log(movie);
-  }, []);
+  }, [id]);
 
   const getMinutes = () => {
     const minutes = movie.runtime;
@@ -24,6 +29,14 @@ function Detail() {
 
     return `${hours}시간 ${formatMin}분`;
   };
+
+  if (error) {
+    return (
+      <div>
+        <h1>{error}</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
