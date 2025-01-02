@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // url의 파람을 가져온다.
+import { useParams, Link } from "react-router-dom"; // url의 파람을 가져온다.
 
 function Detail() {
   const [loading, setLoading] = useState(true);
@@ -50,6 +50,9 @@ function Detail() {
         <h1>loading...</h1>
       ) : (
         <div>
+          <div>
+            <Link to={`${process.env.PUBLIC_URL}/`}>홈으로</Link>
+          </div>
           <img src={movie.medium_cover_image} alt={movie.title} />
           <h1>{movie.title}</h1>
           <p>개봉년도: {movie.year}</p>
