@@ -6,16 +6,22 @@ function Detail() {
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
+
   const getMovie = async () => {
     try {
       const json = await (await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)).json();
-      setMovie(json.data.movie);
+      if (json.data.movie) {
+        setMovie(json.data.movie);
+      } else {
+        throw new Error("영화를 찾을 수 없습니다.");
+      }
       setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getMovie();
   }, [id]);

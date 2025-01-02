@@ -6,9 +6,6 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <App />
-  // <BrowserRouter basename={process.env.PUBLIC_URL}>
-  //   <App />
-  // </BrowserRouter>
 
   // 감싸져 있으면 render를 두번함
   // <React.StrictMode>
