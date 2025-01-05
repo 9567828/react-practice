@@ -51,7 +51,7 @@ function Detail() {
       ) : (
         <div>
           <div>
-            <Link to={`${process.env.PUBLIC_URL}/`}>홈으로</Link>
+            <Link to="/">홈으로</Link>
           </div>
           <img src={movie.medium_cover_image} alt={movie.title} />
           <h1>{movie.title}</h1>
